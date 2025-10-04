@@ -1,3 +1,6 @@
+const template  = document.querySelector('#pet-card-templet')
+const  wrapper = document.createDocumentFragment()
+
 
 
 async function fastStart() {
@@ -10,4 +13,27 @@ async function fastStart() {
 document.querySelector('#temperaturs').textContent=outTemperature
 }
 
-fastStart()
+fastStart() // fuction call 
+
+async function petsArea() {
+    const petsPromise = await fetch('https://learnwebcode.github.io/bootcamp-pet-data/pets.json')
+
+    const ptetsA = await petsPromise.json()
+    console.log(' data ache',ptetsA);
+    ptetsA.forEach( (pet) => {
+        const clone = template.content.cloneNode(true) 
+        clone.querySelector('h3').textContent = pet.name
+        wrapper.appendChild(clone)
+    });
+    document.querySelector('.list-Of-pets').appendChild(wrapper)
+    
+}
+
+petsArea() // fuction call 
+
+
+
+
+
+
+
